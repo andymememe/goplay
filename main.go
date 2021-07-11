@@ -18,7 +18,7 @@ func main() {
 	for !quitted {
 		cmd = ShowCmdPrompt()
 		switch cmd {
-		case "select_file":
+		case "File Selection":
 			filename = ShowFilePrompt(getFileList())
 			if isDir(filename) {
 				err := os.Chdir(filename)
@@ -28,7 +28,7 @@ func main() {
 				filename = ""
 			}
 			fmt.Println(filename)
-		case "quit":
+		case "Quit":
 			quitted = true
 		}
 		CallClear()

@@ -38,7 +38,7 @@ func CreateMainUI() {
 func ShowCmdPrompt() string {
 	prompt := promptui.Select{
 		Label: "Select Command",
-		Items: []string{"select_file", "quit"},
+		Items: []string{"File Selection", "Quit"},
 	}
 
 	_, result, err := prompt.Run()
