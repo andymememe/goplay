@@ -11,12 +11,17 @@ import (
 
 var clear map[string]func() = map[string]func(){
 	"linux": func() {
-		cmd := exec.Command("clear") //Linux example, its tested
+		cmd := exec.Command("clear")
+		cmd.Stdout = os.Stdout
+		cmd.Run()
+	},
+	"darwin": func() {
+		cmd := exec.Command("clear")
 		cmd.Stdout = os.Stdout
 		cmd.Run()
 	},
 	"windows": func() {
-		cmd := exec.Command("cmd", "/c", "cls") //Windows example, its tested
+		cmd := exec.Command("cmd", "/c", "cls")
 		cmd.Stdout = os.Stdout
 		cmd.Run()
 	},
@@ -61,10 +66,11 @@ func ShowFilePrompt(files []string) string {
 }
 
 func CallClear() {
-	value, ok := clear[runtime.GOOS] //runtime.GOOS -> linux, windows, darwin etc.
-	if ok {                          //if we defined a clear func for that platform:
-		value() //we execute it
-	} else { //unsupported platform
-		panic("Your platform is unsupported! I can't clear terminal screen :(")
+	value, ok := clear[runtime.GOOS]
+	if ok {
+		value()
+	} else {
+		value := clear["linux"]
+		value()
 	}
 }
