@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"log"
 	"os"
 )
@@ -40,7 +39,7 @@ func getFileList() []string {
 		"..",
 	}
 
-	files, err := ioutil.ReadDir("./")
+	files, err := os.ReadDir("./")
 	if err != nil {
 		log.Fatal(err)
 	}
