@@ -19,12 +19,13 @@ func main() {
 		switch cmd {
 		case "File Selection":
 			filename = ShowFilePrompt(getFileList())
-			if isDir(filename) {
+			for isDir(filename) {
 				err := os.Chdir(filename)
 				if err != nil {
 					log.Fatalln(err)
 				}
-				filename = ""
+				CallClear()
+				filename = ShowFilePrompt(getFileList())
 			}
 			fmt.Println(filename)
 		case "Quit":
